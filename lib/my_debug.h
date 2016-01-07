@@ -7,14 +7,14 @@
 
 #ifndef _MY_DEBUG_H_
 #define _MY_DEBUG_H_
-
+#include <stdio.h>
 #define DEBUG
 #ifdef DEBUG
 //#include
 #define debug(fmt, x...) \
-	do \
+do \
 {\
-	printf("%s %s(Line %d):"fmt,__FILE__, __FUNCTION__, __LINE__,##x);\
+	printf("[%s][%s][%d]:"fmt,__FILE__, __FUNCTION__, __LINE__,##x);\
 }while(0)
 #else
 #define debug(...)
