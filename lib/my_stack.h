@@ -29,13 +29,16 @@ RESULT_ENUM push_stack(MY_STACK_HEAD* head, void* data);
 
 RESULT_ENUM pop_stack(MY_STACK_HEAD* head);
 
-MY_STACK_HEAD* init_stack_head()
+RESULT_ENUM init_stack_head(MY_STACK_HEAD* head)
 {
-	MY_STACK_HEAD* head;
 	head = (MY_STACK_HEAD*)malloc(sizeof(MY_STACK_HEAD));
+	if(NULL == head)
+	{
+		return RESULT_FAILED; 
+	}
 	head->num = 0;
 	head->stack_top = NULL;
-	return head;
+	return RESULT_SUCCESS;
 }
 
 RESULT_ENUM push_stack(MY_STACK_HEAD* head, void* data)
@@ -62,8 +65,8 @@ RESULT_ENUM pop_stack(MY_STACK_HEAD* head)
 		return RESULT_FAILED;
 	}
 	head->stack_top = head->stack_top->next;
-	head->num--;
 	free(index);
+	head->num--;
 	return RESULT_SUCCESS;
 }
 #endif
