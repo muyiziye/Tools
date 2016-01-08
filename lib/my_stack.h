@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "my_define.h"
 
 typedef struct MY_STACK
 {
@@ -24,9 +25,9 @@ typedef struct MY_STACK_HEAD
 
 MY_STACK_HEAD* init_stack_head();
 
-int push_stack(MY_STACK* head);
+RESULT_ENUM push_stack(MY_STACK_HEAD* head, void* data);
 
-int pop_stack(MY_STACK* head);
+RESULT_ENUM pop_stack(MY_STACK_HEAD* head);
 
 MY_STACK_HEAD* init_stack_head()
 {
@@ -37,30 +38,32 @@ MY_STACK_HEAD* init_stack_head()
 	return head;
 }
 
-int push_stack(MY_STACK* head, void* data)
+RESULT_ENUM push_stack(MY_STACK_HEAD* head, void* data)
 {
     MY_STACK* index;
 	index = (MY_STACK*)malloc(sizeof(MY_STACK));
 	if (NULL == index) 
 	{
-		return 0;
+		return RESULT_FAILED;
 	}
 	index->data = data;
-	index->next = head->next;
-	head->next = index;
-	return 1;
+	index->next = head->stack_top;
+	head->stack_top = index;
+	head->num++;
+	return RESULT_SUCCESS;
 }
 
-int pop_stack(MY_STACK* head)
+RESULT_ENUM pop_stack(MY_STACK_HEAD* head)
 {
     MY_STACK* index;
-	index = head->next;
+	index = head->stack_top;
     if (NULL == index)
 	{
-		return 0;
+		return RESULT_FAILED;
 	}
-	head->next = head->next->next;
+	head->stack_top = head->stack_top->next;
+	head->num--;
 	free(index);
-	return 1;
+	return RESULT_SUCCESS;
 }
 #endif
