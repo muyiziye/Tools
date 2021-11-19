@@ -1,10 +1,10 @@
+#!/bin/bash
 #########################################################################
 # File Name: my_ssh.sh
 # Author: liuyang
 # mail: liuyang91@lenovo.com
 # Created Time: Fri 12 Apr 2019 09:50:22 AM CST
 #########################################################################
-#!/bin/bash
 
 a="root@xx.xx.xx.xx"
 

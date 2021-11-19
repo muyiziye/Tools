@@ -6,7 +6,6 @@ ip_list=`sudo fail2ban-client status sshd | tail -n 1`
 ip_list=`echo $ip_list | awk -F: '{printf $2}' | sed "s/ \t//g"`
 
 if [[ x$ip_list == x"" ]];then
-	echo "no ip was banded"
 	exit 0
 fi
 
